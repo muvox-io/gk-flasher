@@ -1,0 +1,38 @@
+[tool.poetry]
+name = "gk-flasher"
+version = "0.1.0"
+description = "GK flashing utility"
+authors = ["alufers <alufers@wp.pl>"]
+readme = "README.md"
+packages = [{include = "gk_flasher"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+
+[tool.poetry.scripts]
+gk-flasher = 'gk_flasher.gk_flasher:main'
+
+[tool.black]
+line-length = 88
+target-version = ['py310']
+
+
+[tool.flake8]
+max-line-length = 120
+extend-ignore = 'E203,E501'
+
+[tool.isort]
+profile = "black"
+
+[tool.mypy]
+python_version = "3.10"
+
+[tool.docformatter]
+recursive = true
+wrap-summaries = 88
