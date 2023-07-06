@@ -45,13 +45,6 @@ repos:
       - id: flake8
         entry: pflake8
         additional_dependencies: [pyproject-flake8]
-  - repo: https://github.com/netromdk/vermin
-    rev: v1.5.2
-    hooks:
-      - id: vermin
-        # specify your target version here, OR in a Vermin config file as usual:
-        args: ["-t=3.9-", "--violations"]
-        # (if your target is specified in a Vermin config, you may omit the 'args' entry entirely)
   - repo: https://github.com/adrienverge/yamllint.git
     rev: v1.32.0
     hooks:
