@@ -1,7 +1,11 @@
-from typing import Any, List
+from typing import Any, List, Optional
 from pydantic import BaseModel
 import enum
+
+SCHEMA_VERSION = 1
+
 class Package(BaseModel):
+    schema_version: int = SCHEMA_VERSION
     name: str
     version: str
     description: str
@@ -35,3 +39,14 @@ class ESPPackageAttributes(BaseModel):
 class ESPComponentAttributes(BaseModel):
     offset: int
 
+GK_FLASHER_ATTRIBUTE_KEY = "gk_flasher"
+
+class GKFlasherPackageAttributes(BaseModel):
+    target_name: Optional[str]
+    target_hardware_variant: Optional[str]
+    target_photo_url: Optional[str]
+
+class GKFlasherComponentAttributes(BaseModel):
+    order: int
+    flashable_by_default: bool
+    

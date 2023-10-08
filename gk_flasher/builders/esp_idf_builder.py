@@ -3,7 +3,7 @@ from typing import List, Optional
 from gk_flasher.builders.base import BaseBuilder
 import json
 import os
-from gk_flasher.schema.package_schema import ESP_ATTRIBUTE_KEY, ESPComponentAttributes, ESPPackageAttributes
+from gk_flasher.schema.package_schema import ESP_ATTRIBUTE_KEY, GK_FLASHER_ATTRIBUTE_KEY, ESPComponentAttributes, ESPPackageAttributes, GKFlasherComponentAttributes
 import re
 
 class EspIDFBuilder(BaseBuilder):
@@ -75,7 +75,12 @@ class EspIDFBuilder(BaseBuilder):
             print(f"Adding file {filename} at offset {offset}")
             
             self.add_file(f"{self.build_dir}/{filename}", attributes={
-                    ESP_ATTRIBUTE_KEY: ESPComponentAttributes(offset=offset).model_dump()
+                    ESP_ATTRIBUTE_KEY: ESPComponentAttributes(offset=offset).model_dump(),
+                    GK_FLASHER_ATTRIBUTE_KEY: GKFlasherComponentAttributes(
+                        order=all_files.index((offset, filename)),
+                        flashable_by_default=filename in files_flashable_by_default
+                    ).model_dump(
+                    )
                 }, kind="FIRMWARE_IMAGE")
     
         self.finalize()
