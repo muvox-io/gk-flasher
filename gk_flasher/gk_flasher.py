@@ -50,8 +50,8 @@ def main():
     args = parser.parse_args()
 
     if args.subcommand is None:
-        parser.print_help()
-        return
+        import gk_flasher.gui.gk_flasher_gui as gui
+        gui.run_gui()
 
     # Call the function associated with the chosen subcommand
     args.func(args)

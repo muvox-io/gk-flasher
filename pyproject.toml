@@ -7,9 +7,12 @@ readme = "README.md"
 packages = [{include = "gk_flasher"}]
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = ">=3.11,<3.12"
 pydantic = "^2.0.2"
 
+
+[tool.poetry.group.gui.dependencies]
+pyside6 = "^6.5.3"
 
 [build-system]
 requires = ["poetry-core"]
