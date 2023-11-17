@@ -177,3 +177,5 @@ pyrightconfig.json
 
 
 result
+
+*.gk_pkg

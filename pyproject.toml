@@ -9,6 +9,8 @@ packages = [{include = "gk_flasher"}]
 [tool.poetry.dependencies]
 python = ">=3.11,<3.12"
 pydantic = "^2.0.2"
+typed-argument-parser = "^1.9.0"
+httpx = "^0.25.1"
 
 
 [tool.poetry.group.gui.dependencies]
