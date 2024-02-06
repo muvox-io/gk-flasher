@@ -1,9 +1,11 @@
+# -*- coding: utf-8 -*-
 import sys
-from PySide6.QtWidgets import QApplication, QMainWindow, QMenuBar, QMenu
+
 from PySide6.QtGui import QAction
+from PySide6.QtWidgets import QApplication, QMainWindow, QMenu, QMenuBar
+
 
 class GKFlasherMainWindow(QMainWindow):
-
     menu_bar: QMenuBar
 
     def __init__(self):
@@ -11,7 +13,7 @@ class GKFlasherMainWindow(QMainWindow):
 
         # Create the menubar
         self.create_menu_bar()
-       
+
         self.setWindowTitle("GK Flasher")
         self.resize(800, 600)
 

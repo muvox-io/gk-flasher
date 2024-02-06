@@ -1,18 +1,24 @@
-from zipfile import ZipFile
-from gk_flasher.schema.package_schema import Package, Component
-import json
+# -*- coding: utf-8 -*-
 import hashlib
-import pathlib
+import json
 import os
 from typing import Any, Optional
+from zipfile import ZipFile
+
+from gk_flasher.schema.package_schema import Component, Package
+
 
 class BaseBuilder:
     schema: Package
     zipFile: ZipFile
     output: str
 
-    def __init__(self, output: str):
-        
+    def __init__(
+        self,
+        output: str,
+        # version: str,
+        # mvuox_api_hardware_project_identifier: Optional[str],
+    ):
         self.output = output
         self.zipFile = ZipFile(self.output, "w")
         self.schema = Package(
@@ -23,13 +29,14 @@ class BaseBuilder:
             attributes={},
             components=[],
         )
+
     def add_file(
-            self,
-            path: str,
-            filename: Optional[str] = None,
-            version: Optional[str] = None,
-            kind: Optional[str] = None,
-            attributes: Optional[dict[str, Any]] = None,
+        self,
+        path: str,
+        filename: Optional[str] = None,
+        version: Optional[str] = None,
+        kind: Optional[str] = None,
+        attributes: Optional[dict[str, Any]] = None,
     ):
         # get size and sha256
         size = os.path.getsize(path)
@@ -58,13 +65,8 @@ class BaseBuilder:
                 attributes=attributes,
             )
         )
-       
 
-     
-    
     def finalize(self):
-     
         json_data = json.dumps(self.schema.dict(), indent=4)
         self.zipFile.writestr("manifest.json", json_data)
         self.zipFile.close()
-
