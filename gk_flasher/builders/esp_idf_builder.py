@@ -6,6 +6,7 @@ import re
 from typing import List, Optional
 
 from gk_flasher.builders.base import BaseBuilder
+from gk_flasher.schema.args_schema import PackageArgs
 from gk_flasher.schema.package_schema import (
     ESP_ATTRIBUTE_KEY,
     GK_FLASHER_ATTRIBUTE_KEY,
@@ -18,9 +19,9 @@ from gk_flasher.schema.package_schema import (
 class EspIDFBuilder(BaseBuilder):
     build_dir: str
 
-    def __init__(self, build_dir: str, *args, **kwargs):
-        super(EspIDFBuilder, self).__init__(*args, **kwargs)
-        self.build_dir = build_dir
+    def __init__(self, args: PackageArgs):
+        super(EspIDFBuilder, self).__init__(args)
+        self.build_dir = args.package_esp_idf
 
     def build_package(self):
         flash_args_data: dict = {}

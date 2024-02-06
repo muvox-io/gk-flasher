@@ -4,6 +4,7 @@ import json
 import os
 from typing import Any, Optional
 from zipfile import ZipFile
+from gk_flasher.schema.args_schema import PackageArgs
 
 from gk_flasher.schema.package_schema import Component, Package
 
@@ -15,15 +16,13 @@ class BaseBuilder:
 
     def __init__(
         self,
-        output: str,
-        # version: str,
-        # mvuox_api_hardware_project_identifier: Optional[str],
+        args: PackageArgs,
     ):
-        self.output = output
+        self.output = args.package_output
         self.zipFile = ZipFile(self.output, "w")
         self.schema = Package(
             name="NO_NAME",
-            version="NO_VERSION",
+            version=args.version,
             description="NO_DESCRIPTION",
             changelog="NO_CHANGELOG",
             attributes={},

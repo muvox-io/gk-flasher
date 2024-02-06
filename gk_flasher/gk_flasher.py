@@ -2,24 +2,16 @@
 
 
 import asyncio
-from typing import Optional
 
 from tap import Tap
 
 from gk_flasher.builders.esp_idf_builder import EspIDFBuilder
+from gk_flasher.schema.args_schema import PackageArgs
 from gk_flasher.schema.package_schema import (
     MUVOX_API_ATTRIBUTE_KEY,
     MuvoxAPIPackageAttributes,
 )
 from gk_flasher.uploader.uploader import UploadArgs, upload
-
-
-class PackageArgs(Tap):
-    package_esp_idf: str  # Path to esp-idf's build/ directory to build a GK Flasher package from
-    package_output: str  # Path to output GK Flasher package to
-    muvox_api_hardware_project_identifier: Optional[
-        str
-    ]  # Identifier for the hardware project on muvox-api
 
 
 def package(args: PackageArgs):
@@ -28,7 +20,7 @@ def package(args: PackageArgs):
             raise Exception(
                 "--package-output must be specified if --package-esp-idf is specified"
             )
-        builder = EspIDFBuilder(args.package_esp_idf, args.package_output)
+        builder = EspIDFBuilder(args)
         if args.muvox_api_hardware_project_identifier is not None:
             builder.schema.attributes[
                 MUVOX_API_ATTRIBUTE_KEY
