@@ -19,12 +19,12 @@
       in
       {
         packages = {
-          myapp = mkPoetryApplication { projectDir = self; };
-          default = self.packages.${system}.myapp;
+          gk-flasher = mkPoetryApplication { projectDir = self; };
+          default = self.packages.${system}.gk-flasher;
         };
 
         devShells.default = pkgs.mkShell {
-          inputsFrom = [ self.packages.${system}.myapp ];
+          inputsFrom = [ self.packages.${system}.gk-flasher ];
           packages = [ pkgs.poetry ];
         };
       });
