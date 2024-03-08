@@ -6,6 +6,7 @@ import asyncio
 from tap import Tap
 
 from gk_flasher.builders.esp_idf_builder import EspIDFBuilder
+from gk_flasher.dump_manifest import DumpManifestArgs, dump_manifest
 from gk_flasher.schema.args_schema import PackageArgs
 from gk_flasher.schema.package_schema import (
     MUVOX_API_ATTRIBUTE_KEY,
@@ -37,6 +38,11 @@ class Args(Tap):
         self.add_subparsers(help="sub-command help", dest="subcommand")
         self.add_subparser("package", PackageArgs, help="Build gk_pkg")
         self.add_subparser("upload", UploadArgs, help="Upload gk_pkg to muvox-api")
+        self.add_subparser(
+            "dump-manifest",
+            DumpManifestArgs,
+            help="Dump manifest of gk_pkg",
+        )
 
 
 async def async_main():
@@ -50,6 +56,8 @@ async def async_main():
         package(args)
     elif args.subcommand == "upload":
         await upload(args)
+    elif args.subcommand == "dump-manifest":
+        dump_manifest(args)
 
 
 def main():

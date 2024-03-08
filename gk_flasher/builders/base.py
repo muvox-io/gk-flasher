@@ -4,8 +4,8 @@ import json
 import os
 from typing import Any, Optional
 from zipfile import ZipFile
-from gk_flasher.schema.args_schema import PackageArgs
 
+from gk_flasher.schema.args_schema import PackageArgs
 from gk_flasher.schema.package_schema import Component, Package
 
 

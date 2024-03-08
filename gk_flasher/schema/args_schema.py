@@ -1,5 +1,8 @@
+# -*- coding: utf-8 -*-
 from typing import Optional
+
 from tap import Tap
+
 
 class PackageArgs(Tap):
     package_esp_idf: str  # Path to esp-idf's build/ directory to build a GK Flasher package from
@@ -8,4 +11,3 @@ class PackageArgs(Tap):
         str
     ]  # Identifier for the hardware project on muvox-api
     version: Optional[str]  # Version of the package
-
