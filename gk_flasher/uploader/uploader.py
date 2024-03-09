@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 from httpx import AsyncClient, HTTPStatusError, RequestError
 from tap import Tap
 
@@ -9,11 +10,12 @@ class UploadArgs(Tap):
     url: str  # Root API URL to upload to
 
 
-async def upload(args: UploadArgs):
+async def upload(args: UploadArgs) -> bool:
     """Uploads the GK Flasher package to the specified muvox-api URL using the specified
     API key.
 
     :param args: The arguments to use when uploading
+    :return: True if the upload was successful, False otherwise
     """
     full_url = args.url + "/admin-api/v1/software-releases/ingest"
     try:
@@ -25,18 +27,22 @@ async def upload(args: UploadArgs):
                     files={"file": package_file},
                 )
                 response.raise_for_status()  # Raises an exception for 4XX/5XX responses
+                return True
     except HTTPStatusError as e:
         # Handle HTTP errors that return a response (e.g., 404, 401)
         content_preview = e.response.content[
             :2048
         ]  # Limit the content preview to 2048 bytes
-        print("HTTP error occurred.")
+
         print(
             f"Response status code: {e.response.status_code}. Response content: {str(content_preview)}"
         )
+        return False
     except RequestError as e:
         # Handle client-side request errors (e.g., network issues)
         print(f"Request error occurred: {e}")
+        return False
     except Exception as e:
         # Handle other possible errors (e.g., file not found, permission errors)
         print(f"An error occurred: {e}")
+        return False

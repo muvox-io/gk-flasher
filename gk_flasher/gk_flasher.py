@@ -2,6 +2,7 @@
 
 
 import asyncio
+import sys
 
 from tap import Tap
 
@@ -55,7 +56,8 @@ async def async_main():
     elif args.subcommand == "package":
         package(args)
     elif args.subcommand == "upload":
-        await upload(args)
+        if not await upload(args):
+            sys.exit(1)
     elif args.subcommand == "dump-manifest":
         dump_manifest(args)
 
