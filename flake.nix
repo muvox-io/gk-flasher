@@ -19,7 +19,7 @@
       in
       {
         packages = {
-          gk-flasher = mkPoetryApplication { projectDir = self; };
+          gk-flasher = mkPoetryApplication { projectDir = ./.; };
           default = self.packages.${system}.gk-flasher;
         };
 
