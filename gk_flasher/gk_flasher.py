@@ -27,7 +27,8 @@ def package(args: PackageArgs):
             builder.schema.attributes[
                 MUVOX_API_ATTRIBUTE_KEY
             ] = MuvoxAPIPackageAttributes(
-                hardware_project_identifier=args.muvox_api_hardware_project_identifier
+                hardware_project_identifier=args.muvox_api_hardware_project_identifier,
+                release_channel_names=args.release_channels.split(","),
             )
         builder.build_package()
 

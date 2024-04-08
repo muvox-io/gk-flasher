@@ -11,3 +11,4 @@ class PackageArgs(Tap):
         str
     ]  # Identifier for the hardware project on muvox-api
     version: Optional[str]  # Version of the package
+    release_channels: Optional[str]  # Comma-separated list of release channels to publish to

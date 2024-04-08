@@ -66,3 +66,4 @@ MUVOX_API_ATTRIBUTE_KEY = "muvox_api"
 class MuvoxAPIPackageAttributes(BaseModel):
     subschema_version: int = 1
     hardware_project_identifier: str = ""
+    release_channel_names: List[str] = []
